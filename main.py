@@ -20,9 +20,6 @@ if Person.table_exists():
 
 Person.create_table()
 
-#for i in range(0,15):
-#	Person.create( name = 'test'+str(i), stuNum = i+100)
-
 for record in inputFile:
 	line =  record.split(',')
 	recNum = int( line[0].strip() )
@@ -32,4 +29,13 @@ for record in inputFile:
 for person in Person.select():
 	print person.stuNum, person.name
 
+#Now for reading for output
 
+persons = []
+for person in Person.select():
+	persons.append(person)
+
+persons = sorted(persons, key=lambda person:person.stuNum)
+
+for person in persons:
+	print '-',person.stuNum, person.name
