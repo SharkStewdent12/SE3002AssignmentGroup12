@@ -2,6 +2,7 @@ from peewee import *
 
 db = SqliteDatabase('people.db')
 inputFile = open('lab3Input.txt','r')
+outputFile = open('lab3Output.txt','w')
 
 class Person(Model):
 	name = CharField()
@@ -12,9 +13,6 @@ class Person(Model):
 
 
 #Main
-
-
-
 if Person.table_exists():
 	Person.drop_table()
 
@@ -39,3 +37,10 @@ persons = sorted(persons, key=lambda person:person.stuNum)
 
 for person in persons:
 	print '-',person.stuNum, person.name
+	#outputFile.write( str(person.stuNum) + ', ' + person.name + '\n')
+
+for i in (range(0,15) + range(len(persons)-15,len(persons))):	
+	outputFile.write( str(persons[i].stuNum) + ', ' + persons[i].name + '\n')
+
+
+outputFile.close()
