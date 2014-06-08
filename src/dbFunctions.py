@@ -1,3 +1,4 @@
+#Written by Khalid Ebrahim and Mark Durrheim
 from peewee import *
 
 db = SqliteDatabase('people.db')

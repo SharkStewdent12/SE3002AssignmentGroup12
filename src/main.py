@@ -1,3 +1,4 @@
+#Written by Mark Durrheim
 from dbFunctions import *
 
 initialiseDatabase()
