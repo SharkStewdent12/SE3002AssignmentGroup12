@@ -34,27 +34,61 @@ def sortPeople(persons, order):
 	persons = sorted(persons, key=lambda person:person.stuNum, reverse = order)
 	return persons
 	
-#Main
+def writePeopleToText(persons,textfileName):
+	outputFile = open(textfileName,'w')
+	for person in persons:
+		outputFile.write( str(person.stuNum) + ', ' + person.name + '\n')
+	outputFile.close()
 
+def printSampleFromDB():
+	print "Sample from Database:"
+	persons = getPeopleFromDB()
+	for i in (range(0,15) + range(len(persons)-15,len(persons))):
+		print persons[i].stuNum, persons[i].name
+
+def printSampleFromText(textfileName):
+	print "Sample from",textfileName
+	inputFile = open(textfileName,'r')
+	persons = []
+	for record in inputFile:
+		line =  record.split(',')
+		recNum = int( line[0].strip() )
+		recName = line[1].strip()
+		persons.append(Person( name = recName, stuNum = recNum))
+	for i in (range(0,15) + range(len(persons)-15,len(persons))):
+		print persons[i].stuNum, persons[i].name
+
+def getOrderFlag():
+	ASC = False
+	DESC = True
+	print "Select order to sort records 'ASC' or 'DESC'."
+	while True:
+		lineIn = raw_input()
+		if (lineIn.upper() == "ASC"):
+			return ASC
+		elif (lineIn.upper() == "DESC"):
+			return DESC
+		else:
+			print "you must input 'ASC' or 'DESC'"
+	
+
+#Main
 initialiseDatabase()
 
 readToDB('lab3Input.txt')
 
+printSampleFromDB()
 
 persons = getPeopleFromDB()
 
-#get flag for order
-ASC = False
-DESC = True
-order = ASC
+order = getOrderFlag()
+
 persons = sortPeople(persons,order)
 
-for person in persons:
-	print '-',person.stuNum, person.name
-	#outputFile.write( str(person.stuNum) + ', ' + person.name + '\n')
+print '\n'
 
-for i in (range(0,15) + range(len(persons)-15,len(persons))):	
-	outputFile.write( str(persons[i].stuNum) + ', ' + persons[i].name + '\n')
+writePeopleToText(persons,'lab3Output.txt')
+
+printSampleFromText('lab3Output.txt')
 
 
-outputFile.close()
