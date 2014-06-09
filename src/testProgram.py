@@ -10,6 +10,8 @@ except:
 try:
     readToDB('Broken.txt')
     print "Textfile reading into database Passed"
+except SystemExit:
+	print "Error caught"
 except:
     print "Textfile contains errors. Test Failed."
 
