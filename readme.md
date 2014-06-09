@@ -13,5 +13,5 @@ Compile test program and main program:
 make testProgram
 
 Run using:
-python main.py and 
-python testProgram.py
+python main.pyc and 
+python testProgram.pyc
