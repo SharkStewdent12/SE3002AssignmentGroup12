@@ -3,8 +3,6 @@ from peewee import *
 
 db = SqliteDatabase('people.db')
 
-outputFile = open('lab3Output.txt','w')
-
 class Person(Model):
 	name = CharField()
 	stuNum = IntegerField()
@@ -30,6 +28,7 @@ def readToDB(textfileName):
 			Person.create( name = recName, stuNum = recNum)
 	except:
 		print 'Incorrect input format:"',record,'"from',textfileName
+	inputFile.close()
 
 def getPeopleFromDB():
 	try:
