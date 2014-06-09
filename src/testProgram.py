@@ -26,9 +26,9 @@ except:
    
 try:
     order = getOrderFlag()
-    print "Order from user correct"
+    print "Order from user Passed."
 except:
-    print "Order not of type expected. "
+    print "Order not of type expected. Order from user Failed"
 
 try:
     persons = sortPeople(persons,order)
