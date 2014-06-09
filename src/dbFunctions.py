@@ -18,18 +18,27 @@ def initialiseDatabase():
 	Person.create_table()
 	
 def readToDB(textfileName):
-	inputFile = open(textfileName,'r')
-	for record in inputFile:
-		line =  record.split(',')
-		recNum = int( line[0].strip() )
-		recName = line[1].strip()
-		Person.create( name = recName, stuNum = recNum)
+	try:
+		inputFile = open(textfileName,'r')
+	except:
+		print 'Cannot open file',textfileName
+	try:
+		for record in inputFile:
+			line =  record.split(',')
+			recNum = int( line[0].strip() )
+			recName = line[1].strip()
+			Person.create( name = recName, stuNum = recNum)
+	except:
+		print 'Incorrect input format:"',record,'"from',textfileName
 
 def getPeopleFromDB():
-	persons = []
-	for person in Person.select():
-		persons.append(person)
-	return persons
+	try:
+		persons = []
+		for person in Person.select():
+			persons.append(person)
+		return persons
+	except:
+		print 'Cannot read people from the database'
 	
 def sortPeople(persons, order):
 	persons = sorted(persons, key=lambda person:person.stuNum, reverse = order)
@@ -42,22 +51,37 @@ def writePeopleToText(persons,textfileName):
 	outputFile.close()
 
 def printSampleFromDB():
-	print "Sample from Database:"
 	persons = getPeopleFromDB()
-	for i in (range(0,15) + range(len(persons)-15,len(persons))):
-		print persons[i].stuNum, persons[i].name
+	print "Sample from Database:"
+	if (len(persons) >= 15):
+		persons = getPeopleFromDB()
+		print 'First 15:'
+		for i in range(0,15):
+			print persons[i].stuNum, persons[i].name
+		print '\nLast 15:'
+		for i in range(len(persons)-15,len(persons)):
+			print persons[i].stuNum, persons[i].name
+	else:	
+		for person in persons:
+			print persons[i].stuNum, persons[i].name
+
 
 def printSampleFromText(textfileName):
 	print "Sample from",textfileName
 	inputFile = open(textfileName,'r')
-	persons = []
+	records = []
 	for record in inputFile:
-		line =  record.split(',')
-		recNum = int( line[0].strip() )
-		recName = line[1].strip()
-		persons.append(Person( name = recName, stuNum = recNum))
-	for i in (range(0,15) + range(len(persons)-15,len(persons))):
-		print persons[i].stuNum, persons[i].name
+		records.append(record.strip())
+	if (len(records) >= 15):
+		print 'First 15:'
+		for i in range(0,15):
+			print records[i]
+		print '\nLast 15:'
+		for i in range(len(records)-15,len(records)):
+			print records[i]		
+	else:	
+		for record in records:
+			print record
 
 def getOrderFlag():
 	ASC = False
