@@ -1,7 +1,6 @@
-#Written by Matthew Unterslak and Mark Durrheim
+#Written by Matthew Unterslak 
 from dbFunctions import *
 
-#do stuff!
 try:
     initialiseDatabase()
     print "Database Initialised"
