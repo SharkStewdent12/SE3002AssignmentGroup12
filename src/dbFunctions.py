@@ -1,5 +1,6 @@
 #Written by Khalid Ebrahim, Mark Durrheim and Matthew Unterslak
 from peewee import *
+import os.path
 
 db = SqliteDatabase('people.db')
 
@@ -16,18 +17,32 @@ def initialiseDatabase():
 	Person.create_table()
 	
 def readToDB(textfileName):
-	try:
-		inputFile = open(textfileName,'r')
-	except:
-		print 'Cannot open file',textfileName
+	if (os.path.exists(textfileName)):
+		try:
+			inputFile = open(textfileName,'r')
+		except:
+			print 'Cannot open file',textfileName
+	else:
+		print 'Cannot find input file "',textfileName,'", please ensure that it is in the directory',os.path.dirname(os.path.realpath(__file__))
+		exit(0)
 	try:
 		for record in inputFile:
+			if (record == ""):
+				print 'Error in input, blank lines are not allowed'
+				exit(0)
 			line =  record.split(',')
 			recNum = int( line[0].strip() )
+			if (len(line[0].strip()) != 6):
+				print 'Error in input, incorrect student number format:',record
+				exit(0)
 			recName = line[1].strip()
+			if (recName == ""):
+				print 'Error in input, blank student name:',record
+				exit(0)
 			Person.create( name = recName, stuNum = recNum)
 	except:
-		print 'Incorrect input format:"',record,'"from',textfileName
+		print 'Incorrect input format:"',record.strip(),'"from',textfileName
+		exit(0)
 	inputFile.close()
 
 def getPeopleFromDB():

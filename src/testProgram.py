@@ -22,7 +22,7 @@ try:
     persons = getPeopleFromDB()
     print "Database reading Passed"
 except:
-    print "Database reading Failed. "
+    print "Database reading Failed."
    
 try:
     order = getOrderFlag()
@@ -31,10 +31,10 @@ except:
     print "Order not of type expected. Order from user Failed"
 
 try:
-    persons = sortPeople(persons,order)
+    persons = sortPeople(persons,True)
     print "Sort entries Passed"
 except:
-    print "Sort Failed. "
+    print "Sort Failed."
 
 try:
     writePeopleToText(persons,'lab3Output.txt')
