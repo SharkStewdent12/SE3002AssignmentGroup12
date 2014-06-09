@@ -1,4 +1,4 @@
-#Written by Khalid Ebrahim and Mark Durrheim
+#Written by Khalid Ebrahim, Mark Durrheim and Matthew Unterslak
 from peewee import *
 
 db = SqliteDatabase('people.db')
@@ -53,7 +53,7 @@ def writePeopleToText(persons,textfileName):
 def printSampleFromDB():
 	persons = getPeopleFromDB()
 	print "Sample from Database:"
-	if (len(persons) >= 15):
+	if (len(persons) >= 30):
 		persons = getPeopleFromDB()
 		print 'First 15:'
 		for i in range(0,15):
@@ -62,6 +62,7 @@ def printSampleFromDB():
 		for i in range(len(persons)-15,len(persons)):
 			print persons[i].stuNum, persons[i].name
 	else:	
+		print 'Less than 30 records, printing all.'
 		for person in persons:
 			print persons[i].stuNum, persons[i].name
 
@@ -72,7 +73,7 @@ def printSampleFromText(textfileName):
 	records = []
 	for record in inputFile:
 		records.append(record.strip())
-	if (len(records) >= 15):
+	if (len(records) >= 30):
 		print 'First 15:'
 		for i in range(0,15):
 			print records[i]
@@ -80,6 +81,7 @@ def printSampleFromText(textfileName):
 		for i in range(len(records)-15,len(records)):
 			print records[i]		
 	else:	
+		print 'Less than 30 records, printing all.'
 		for record in records:
 			print record
 
