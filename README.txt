@@ -9,4 +9,4 @@ use the url https://github.com/SharkStewdent12/SE3002AssignmentGroup12 and use t
 
 Unzip the file.
 
-From this point, refer to readme.md
+From this point, refer to readme.md from the repository.

@@ -6,12 +6,14 @@ If using PyPi to install, refer to https://pip.pypa.io/en/latest/installing.html
 ### Installation
 This installation assumes Linux is being used.
 
-Compile main function only:
+Compile main function:
 make
 
-Compile test program and main program:
+Compile test program:
 make testProgram
 
-Run using:
-python main.pyc and 
+Run main program using:
+python main.pyc
+
+Run test program using:
 python testProgram.pyc
