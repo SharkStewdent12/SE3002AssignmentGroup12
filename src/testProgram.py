@@ -15,9 +15,9 @@ except:
 
 try:
     printSampleFromDB()
+    print "Print sample Passed"
 except:
     print "Textfile contains less than 30 entries or blank entries encountered. Test Failed."
-    
 try:
     persons = getPeopleFromDB()
     print "Database reading Passed"
@@ -44,5 +44,6 @@ except:
 
 try:
     printSampleFromText('lab3Output.txt')
+    print "Print sample from Text Passed"
 except:
     print "The database contains less than 30 entries or blank entries encountered. Print Failed."
